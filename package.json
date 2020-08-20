@@ -8,7 +8,7 @@
     },
 	"repository": {
       "type": "git",
-      "url": "https://github.com/ibraheemghazi/node-red-contrib-sentrynode.git"
+      "url": "https://github.com/ibraheem-ghazi/node-red-contrib-sentrynode.git"
     },
 	"keywords": [ "node-red", "sentry"],
     "author": "Ibraheem Alnabriss",
