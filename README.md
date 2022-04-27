@@ -26,3 +26,7 @@ if `msg` object includes errors `msg.error` it will be used and sent to sentry, 
 
 the node will return a payload of type object having a node `sent` which mean there is valid errors captured and sent to sentry or not.
 note: true does mean successful sent to Sentry (as it may fail due to invalid dsn for example) but it mean that this node captured the error, parsed it, and executed `Sentry.captureException`
+
+## Contributors
+<img src = "https://contrib.rocks/image?repo=ibraheem-ghazi/node-red-contrib-sentrynode"/>
+Made with contrib.rocks
