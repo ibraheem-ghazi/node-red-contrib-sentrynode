@@ -156,5 +156,12 @@ module.exports = function(RED) {
             node.send(msg);
         });
     }
+	RED.hooks.add("postReceive", (receiveEvent) => {
+		Sentry.addBreadcrumb({
+			category: 'node-red', 
+			level: 'info', 
+			message: `Message received for Node ID: ${receiveEvent.destination.id}`
+		});
+	});
     RED.nodes.registerType("sentry", SentryNode);
 }
