@@ -107,15 +107,15 @@ module.exports = function(RED) {
 	/**
 	* custom node-red {Sentry} definition
 	**/
-    function SentryNode(config) {	
-        RED.nodes.createNode(this, config);
-        var node = this;
+	function SentryNode(config) {	
+		RED.nodes.createNode(this, config);
+		var node = this;
 		
 		/**
 		* init the sentry only on deployment
 		*/
-        Sentry.init({ dsn: config.dsn, environment: config.environment || 'debug' });
-        
+		Sentry.init({ dsn: config.dsn, environment: config.environment || 'debug' });
+		
 		node.on('input', function(msg, send, done) {
 			
 			//set configuration throw the payload
@@ -153,8 +153,15 @@ module.exports = function(RED) {
 				node.error(err);
 			}
 			msg.payload = {sent:errorSent};
-            node.send(msg);
-        });
-    }
-    RED.nodes.registerType("sentry", SentryNode);
+			node.send(msg);
+		});
+	}
+	RED.hooks.add("postReceive", (receiveEvent) => {
+		Sentry.addBreadcrumb({
+			category: 'node-red', 
+			level: 'info', 
+			message: `Message received for Node ID: ${receiveEvent.destination.id}`
+		});
+	});
+	RED.nodes.registerType("sentry", SentryNode);
 }
