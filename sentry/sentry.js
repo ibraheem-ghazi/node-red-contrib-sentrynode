@@ -110,11 +110,12 @@ module.exports = function(RED) {
 	function SentryNode(config) {	
 		RED.nodes.createNode(this, config);
 		var node = this;
+		var ENVIRONMENT = RED.util.getSetting(node, 'ENVIRONMENT')
 		
 		/**
 		* init the sentry only on deployment
 		*/
-		Sentry.init({ dsn: config.dsn, environment: config.environment || 'debug' });
+		Sentry.init({ dsn: config.dsn, environment: config.environment || ENVIRONMENT || 'debug' });
 		
 		node.on('input', function(msg, send, done) {
 			

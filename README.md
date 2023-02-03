@@ -18,6 +18,10 @@ the node will search for `msg.sentry` if found, any supported config will be set
 
 *   user: {id, username, email, ip_address}
 
+**Supported `ENVIRONMENT` variable**
+
+the node will use the `ENVIRONMENT` variable found in your `.env` file. Note: The property `Environment` takes precedence over this variable.
+
 **How it works?**
 
 if `msg` object includes errors `msg.error` it will be used and sent to sentry, if also contains `msg._error` it will be added as breadcrumb for the error sent.
